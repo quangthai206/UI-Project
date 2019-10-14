@@ -18,14 +18,21 @@ $(document).ready(function(){
     $(".scroll-to-start").click(function() {
         $("html, body").animate({scrollTop: $(".section-features").offset().top}, 1000);
     });
-    
+
     // smooth scroll in navigation bar
-    $(document).on('click', 'a[href^="#"]', function (event) {
-        event.preventDefault();
+    $('a[href*=\\#]:not([href=\\#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+            || location.hostname == this.hostname) {
     
-        $('html, body').animate({
-            scrollTop: $($.attr(this, 'href')).offset().top
-        }, 1000);
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+               if (target.length) {
+                 $('html,body').animate({
+                     scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
     });
 
     // animation on scroll
