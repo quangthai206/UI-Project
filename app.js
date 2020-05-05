@@ -4,6 +4,8 @@ const request = require('request');
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -59,6 +61,6 @@ app.post("/customer/message", function (req, res) {
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.listen(3000, function () {
+app.listen(PORT, function () {
     console.log("Server started on port 3000");
 })
